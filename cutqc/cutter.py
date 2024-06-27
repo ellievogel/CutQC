@@ -264,6 +264,8 @@ class MIP_Model(object):
         # print('solving for %d subcircuits'%self.num_subcircuit)
         # print('model has %d variables, %d linear constraints,%d quadratic constraints, %d general constraints'
         # % (self.model.NumVars,self.model.NumConstrs, self.model.NumQConstrs, self.model.NumGenConstrs))
+
+        # Utilize Gurobi optimizer to solve the Mixed Integer Programming (MIP) problem
         try:
             self.model.params.threads = 48
             self.model.Params.TimeLimit = 30
@@ -283,16 +285,19 @@ class MIP_Model(object):
             for i in range(self.num_subcircuit):
                 subcircuit = []
                 for j in range(self.n_vertices):
+                    # Check if variables associated with vertices are significant
                     if abs(self.vertex_var[i][j].x) > 1e-4:
                         subcircuit.append(self.id_vertices[j])
                 self.subcircuits.append(subcircuit)
             assert (
+                # Ensure all vertices are accounted for
                 sum([len(subcircuit) for subcircuit in self.subcircuits])
                 == self.n_vertices
             )
 
             cut_edges_idx = []
             cut_edges = []
+            
             for i in range(self.num_subcircuit):
                 for j in range(self.n_edges):
                     if abs(self.edge_var[i][j].x) > 1e-4 and j not in cut_edges_idx:
@@ -307,18 +312,22 @@ class MIP_Model(object):
 
 
 def read_circ(circuit):
+    # Convert circuit into DAG
     dag = circuit_to_dag(circuit)
     edges = []
     node_name_ids = {}
     id_node_names = {}
     vertex_ids = {}
     curr_node_id = 0
+    # Count gates applied to each qubit
     qubit_gate_counter = {}
+
     for qubit in dag.qubits:
         qubit_gate_counter[qubit] = 0
     for vertex in dag.topological_op_nodes():
         if len(vertex.qargs) != 2:
             raise Exception("vertex does not have 2 qargs!")
+        # Construct unique vertex name based on register name, qubit index, and gate count
         arg0, arg1 = vertex.qargs
         vertex_name = "%s[%d]%d %s[%d]%d" % (
             arg0.register.name,
@@ -328,15 +337,17 @@ def read_circ(circuit):
             arg1.index,
             qubit_gate_counter[arg1],
         )
+        # Increment number of gates on that qubit
         qubit_gate_counter[arg0] += 1
         qubit_gate_counter[arg1] += 1
-        # print(vertex.op.label,vertex_name,curr_node_id)
+        
         if vertex_name not in node_name_ids and id(vertex) not in vertex_ids:
             node_name_ids[vertex_name] = curr_node_id
             id_node_names[curr_node_id] = vertex_name
             vertex_ids[id(vertex)] = curr_node_id
             curr_node_id += 1
 
+    # Add edges between vertices if both are operational nodes
     for u, v, _ in dag.edges():
         if u.type == "op" and v.type == "op":
             u_id = vertex_ids[id(u)]
@@ -348,6 +359,7 @@ def read_circ(circuit):
 
 
 def cuts_parser(cuts, circ):
+    # Processes a list of cuts to determine specific postitions within the circuit where cuts occur
     dag = circuit_to_dag(circ)
     positions = []
     for position in cuts:
@@ -359,7 +371,8 @@ def cuts_parser(cuts, circ):
             (x.split("]")[0] + "]", int(x.split("]")[1])) for x in dest.split(" ")
         ]
         qubit_cut = []
-        for source_qarg in source_qargs:
+        for source_qarg in source_qargs
+        # Determine qubit where cut occurs
             source_qubit, source_multi_Q_gate_idx = source_qarg
             for dest_qarg in dest_qargs:
                 dest_qubit, dest_multi_Q_gate_idx = dest_qarg
@@ -378,6 +391,7 @@ def cuts_parser(cuts, circ):
                 dest_idx = int(x.split("]")[1])
         multi_Q_gate_idx = max(source_idx, dest_idx)
 
+        # Locate the corresponding qubit in the quantum circuit
         wire = None
         for qubit in circ.qubits:
             if qubit.register.name == qubit_cut[0].split("[")[0] and qubit.index == int(
@@ -389,10 +403,12 @@ def cuts_parser(cuts, circ):
         for gate_idx, gate in enumerate(
             list(dag.nodes_on_wire(wire=wire, only_ops=True))
         ):
+            # Count multi-qubit gates
             if len(gate.qargs) > 1:
                 tmp += 1
                 if tmp == multi_Q_gate_idx:
                     all_Q_gate_idx = gate_idx
+        # Append tuple indicating the qubit and the gate index where the cut is located
         positions.append((wire, all_Q_gate_idx))
     positions = sorted(positions, reverse=True, key=lambda cut: cut[1])
     return positions
@@ -603,6 +619,8 @@ def find_cuts(
     subcircuit_size_imbalance,
     verbose,
 ):
+    
+    # No single qubit gates or barriers
     stripped_circ = circuit_stripping(circuit=circuit)
     n_vertices, edges, vertex_ids, id_vertices = read_circ(circuit=stripped_circ)
     num_qubits = circuit.num_qubits
@@ -633,13 +651,16 @@ def find_cuts(
         mip_model = MIP_Model(**kwargs)
         feasible = mip_model.solve()
         if feasible:
+            # Get locations of cuts: a list of tuples of type (wire, gate index)
             positions = cuts_parser(mip_model.cut_edges, circuit)
+            # complete_path_map: a mapping that specifies which subcircuit each qubit in original circuit belongs to
             subcircuits, complete_path_map = subcircuits_parser(
                 subcircuit_gates=mip_model.subcircuits, circuit=circuit
             )
             O_rho_pairs = get_pairs(complete_path_map=complete_path_map)
             counter = get_counter(subcircuits=subcircuits, O_rho_pairs=O_rho_pairs)
 
+            # Return cut solution
             cut_solution = {
                 "subcircuits": subcircuits,
                 "complete_path_map": complete_path_map,
