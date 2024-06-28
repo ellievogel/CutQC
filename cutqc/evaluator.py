@@ -1,12 +1,23 @@
-import itertools, copy, pickle, subprocess, psutil, os
+# evaluator.py
+
+import copy
+import itertools
+import os
+import pickle
+import subprocess
+
 import numpy as np
+import psutil
+from qiskit.circuit.library.standard_gates import HGate, SdgGate, SGate, XGate
 from qiskit.converters import circuit_to_dag, dag_to_circuit
-from qiskit.circuit.library.standard_gates import HGate, SGate, SdgGate, XGate
 
 from helper_functions.non_ibmq_functions import find_process_jobs, scrambled
 
 
 def get_num_workers(num_jobs, ram_required_per_worker):
+    """
+    Calculates the optimal number of processes that can be utilized based on system resources
+    """
     ram_avail = psutil.virtual_memory().available / 1024**3
     ram_avail = ram_avail / 4 * 3
     num_cpus = int(os.cpu_count() / 4 * 3)
@@ -26,10 +37,12 @@ def run_subcircuit_instances(
     runtime: for benchmarking, pseudo QPU backend generates uniform distribution
     """
     instance_init_meas_ids = {}
+    # Map each subcircuit instance to its index within the respective subcircuit
     for subcircuit_idx in subcircuit_instances:
         jobs = subcircuit_instances[subcircuit_idx]
         instance_init_meas_ids[subcircuit_idx] = {jobs[i]: i for i in range(len(jobs))}
         jobs = scrambled(jobs)
+        # Serializes metadata about the subcircuits
         pickle.dump(
             {
                 "subcircuits": subcircuits,
@@ -46,9 +59,14 @@ def run_subcircuit_instances(
             / 1e9,
         )
         procs = []
+        
+        # Parallelize the execution of subcircuits across multiple worker processes
         for rank in range(num_workers):
+            # Determine which subset of jobs each worker will process
             rank_jobs = find_process_jobs(jobs=jobs, rank=rank, num_workers=num_workers)
+            # Serialize process jobs into separate pickle files for each worker
             if len(rank_jobs) > 0:
+                # Dump list of jobs into a pickle file
                 pickle.dump(
                     rank_jobs, open("%s/rank_%d.pckl" % (data_folder, rank), "wb")
                 )

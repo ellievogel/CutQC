@@ -1,5 +1,9 @@
+# helper_fun.py
+
 from os import times
+
 from qiskit.converters import circuit_to_dag
+from qiskit.dagcircuit import DAGCircuit
 
 
 def check_valid(circuit):
@@ -13,9 +17,13 @@ def check_valid(circuit):
             "Input circuit is not fully connected thus does not need cutting. Number of unitary factors = %d"
             % circuit.num_unitary_factors()
         )
+
     if circuit.num_clbits > 0:
         raise ValueError("Please remove classical bits from the circuit before cutting")
+
+    # Convert circuit into a Directed Acyclic Graph
     dag = circuit_to_dag(circuit)
+    # Iterate over operational nodes
     for op_node in dag.topological_op_nodes():
         if len(op_node.qargs) > 2:
             raise ValueError("CutQC currently does not support >2-qubit gates")

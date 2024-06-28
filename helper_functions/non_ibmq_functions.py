@@ -1,11 +1,17 @@
-import random, pickle, os, copy, random
-from qiskit import QuantumCircuit
-from qiskit.providers import aer
-from qiskit.converters import circuit_to_dag, dag_to_circuit
-from qiskit.dagcircuit.dagcircuit import DAGCircuit
-from qiskit.quantum_info import Statevector
+# non_ibmq_functions.py
+
+import copy
+import os
+import pickle
+import random
+
 import numpy as np
 import psutil
+from qiskit import QuantumCircuit
+from qiskit.converters import circuit_to_dag, dag_to_circuit
+from qiskit.dagcircuit.dagcircuit import DAGCircuit
+from qiskit.providers import aer
+from qiskit.quantum_info import Statevector
 
 from helper_functions.conversions import dict_to_array
 
@@ -41,6 +47,9 @@ def apply_measurement(circuit, qubits):
 
 
 def find_process_jobs(jobs, rank, num_workers):
+    """
+    Divide the list of jobs into subsets that can be assigned to different worker processes
+    """
     count = int(len(jobs) / num_workers)
     remainder = len(jobs) % num_workers
     if rank < remainder:

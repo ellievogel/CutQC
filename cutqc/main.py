@@ -1,3 +1,5 @@
+# main.py
+
 import subprocess, os
 from time import perf_counter
 
@@ -14,7 +16,7 @@ from cutqc.dynamic_definition import DynamicDefinition, full_verify
 class CutQC:
     """
     The main module for CutQC
-    cut --> evaluate results --> verify (optional)
+    Workflow: cut --> evaluate results --> verify (optional)
     """
 
     def __init__(self, name, circuit, cutter_constraints, verbose):
@@ -34,7 +36,9 @@ class CutQC:
         self.cutter_constraints = cutter_constraints
         self.verbose = verbose
         self.times = {}
+        # Set the directory path to store the temporary data files in
         self.tmp_data_folder = "cutqc/tmp_data"
+        # If this folder already exists,  remove its contents and create new directory for incoming data files
         if os.path.exists(self.tmp_data_folder):
             subprocess.run(["rm", "-r", self.tmp_data_folder])
         os.makedirs(self.tmp_data_folder)
@@ -42,7 +46,7 @@ class CutQC:
     def cut(self):
         """
         Cut the given circuits
-        If use the MIP solver to automatically find cuts, the following are required:
+        If using the MIP solver to automatically find cuts, the following are required:
         max_subcircuit_width: max number of qubits in each subcircuit
 
         The following are optional:
@@ -67,7 +71,8 @@ class CutQC:
                 )
             )
             print(self.cutter_constraints)
-        cutter_begin = perf_counter()
+        
+        start_time_of_cutter = perf_counter()
         cut_solution = find_cuts(
             **self.cutter_constraints, circuit=self.circuit, verbose=self.verbose
         )
@@ -78,7 +83,7 @@ class CutQC:
             self._generate_metadata()
         else:
             self.has_solution = False
-        self.times["cutter"] = perf_counter() - cutter_begin
+        self.times["cutter"] = perf_counter() - start_time_of_cutter
 
     def evaluate(self, eval_mode, num_shots_fn):
         """
@@ -92,7 +97,10 @@ class CutQC:
         self.num_shots_fn = num_shots_fn
 
         evaluate_begin = perf_counter()
+
+        # Execute all defined subcircuits
         self._run_subcircuits()
+        
         self._attribute_shots()
         self.times["evaluate"] = perf_counter() - evaluate_begin
         if self.verbose:
@@ -171,9 +179,11 @@ class CutQC:
         """
         if self.verbose:
             print("--> Running Subcircuits %s" % self.name)
+        # Remove data from tmp_data_folder if it already exists, and make directory
         if os.path.exists(self.tmp_data_folder):
             subprocess.run(["rm", "-r", self.tmp_data_folder])
         os.makedirs(self.tmp_data_folder)
+        # run_subcircuit_instances(subcircuits, subcircuit_instances, eval_mode, num_shots_fn, data_folder)
         run_subcircuit_instances(
             subcircuits=self.subcircuits,
             subcircuit_instances=self.subcircuit_instances,
