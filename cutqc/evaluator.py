@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 # evaluator.py
 
+=======
+>>>>>>> refs/remotes/origin/main
 import copy
 import itertools
 import os

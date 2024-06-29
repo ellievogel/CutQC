@@ -73,6 +73,12 @@ class CutQC:
             print(self.cutter_constraints)
         
         start_time_of_cutter = perf_counter()
+<<<<<<< HEAD
+=======
+
+
+    `   # find_cuts(circuit, max_subcircuit_width, max_cuts, num_subcircuits, max_subcircuit_cuts, subcircuit_size_imbalance, verbose)
+>>>>>>> refs/remotes/origin/main
         cut_solution = find_cuts(
             **self.cutter_constraints, circuit=self.circuit, verbose=self.verbose
         )

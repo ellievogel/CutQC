@@ -373,7 +373,11 @@ def cuts_parser(cuts, circ):
             (x.split("]")[0] + "]", int(x.split("]")[1])) for x in dest.split(" ")
         ]
         qubit_cut = []
+<<<<<<< HEAD
         for source_qarg in source_qargs:
+=======
+        for source_qarg in source_qargs
+>>>>>>> refs/remotes/origin/main
         # Determine qubit where cut occurs
             source_qubit, source_multi_Q_gate_idx = source_qarg
             for dest_qarg in dest_qargs:
