@@ -73,12 +73,9 @@ class CutQC:
             print(self.cutter_constraints)
         
         start_time_of_cutter = perf_counter()
-<<<<<<< HEAD
-=======
 
 
-    `   # find_cuts(circuit, max_subcircuit_width, max_cuts, num_subcircuits, max_subcircuit_cuts, subcircuit_size_imbalance, verbose)
->>>>>>> refs/remotes/origin/main
+        # find_cuts(circuit, max_subcircuit_width, max_cuts, num_subcircuits, max_subcircuit_cuts, subcircuit_size_imbalance, verbose)
         cut_solution = find_cuts(
             **self.cutter_constraints, circuit=self.circuit, verbose=self.verbose
         )
@@ -126,6 +123,8 @@ class CutQC:
         }
 
         build_begin = perf_counter()
+        overall_begin = perf_counter()  # Start the overall timer
+
         dd = DynamicDefinition(
             compute_graph=self.compute_graph,
             data_folder=self.tmp_data_folder,
@@ -143,8 +142,12 @@ class CutQC:
         self.times["build"] += self.times["cutter"]
         self.times["build"] -= self.times["merge_states_into_bins"]
 
+        overall_end = perf_counter()  # End the overall timer
+        overall_time = overall_end - overall_begin  # Calculate the overall time
+
         if self.verbose:
             print("Overhead = {}".format(self.overhead))
+            print("Total build time: {:.6f} seconds".format(overall_time))
 
     def verify(self):
         verify_begin = perf_counter()

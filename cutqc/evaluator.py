@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 # evaluator.py
 
-=======
->>>>>>> refs/remotes/origin/main
 import copy
 import itertools
 import os
@@ -200,6 +197,7 @@ def measure_state(full_state, meas):
 
 
 def attribute_shots(subcircuit_entries, subcircuits, eval_mode, data_folder):
+    # Load metadata
     meta_info = pickle.load(open("%s/meta_info.pckl" % data_folder, "rb"))
     instance_init_meas_ids = meta_info["instance_init_meas_ids"]
     num_workers = 20

@@ -373,12 +373,7 @@ def cuts_parser(cuts, circ):
             (x.split("]")[0] + "]", int(x.split("]")[1])) for x in dest.split(" ")
         ]
         qubit_cut = []
-<<<<<<< HEAD
         for source_qarg in source_qargs:
-=======
-        for source_qarg in source_qargs
->>>>>>> refs/remotes/origin/main
-        # Determine qubit where cut occurs
             source_qubit, source_multi_Q_gate_idx = source_qarg
             for dest_qarg in dest_qargs:
                 dest_qubit, dest_multi_Q_gate_idx = dest_qarg
@@ -424,7 +419,7 @@ def subcircuits_parser(subcircuit_gates, circuit):
     """
     Assign the single qubit gates to the closest two-qubit gates
 
-    Returns:
+    Returns a mapping from the original circuit qubits to their corresponding subcircuit qubits:
     complete_path_map[input circuit qubit] = [{subcircuit_idx,subcircuit_qubit}]
     """
 
@@ -447,10 +442,12 @@ def subcircuits_parser(subcircuit_gates, circuit):
         return distance
 
     dag = circuit_to_dag(circuit)
+    # Initialize dictionaries to keep track of gate depths
     qubit_allGate_depths = {x: 0 for x in circuit.qubits}
     qubit_2qGate_depths = {x: 0 for x in circuit.qubits}
     gate_depth_encodings = {}
     # print('Before translation :',subcircuit_gates,flush=True)
+    # Translate gate depth encodings
     for op_node in dag.topological_op_nodes():
         gate_depth_encoding = ""
         for qarg in op_node.qargs:
@@ -486,6 +483,7 @@ def subcircuits_parser(subcircuit_gates, circuit):
     subcircuit_op_nodes = {x: [] for x in range(len(subcircuit_gates))}
     subcircuit_sizes = [0 for x in range(len(subcircuit_gates))]
     complete_path_map = {}
+    # Assign qubits to subcircuits
     for circuit_qubit in dag.qubits:
         complete_path_map[circuit_qubit] = []
         qubit_ops = dag.nodes_on_wire(wire=circuit_qubit, only_ops=True)

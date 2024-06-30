@@ -7,7 +7,7 @@ import os
 logging.disable(logging.WARNING)                # DEBUG and INFO messages will not be displayed
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
 # Comment this line if using GPU
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"       # CutQC should not utilize a GPU
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"       # CutQC should not utilize a GPU
 
 # Uncomment this line for debugging purposes
 # import pdb
@@ -38,12 +38,12 @@ if __name__ == "__main__":
 
     # Generate an instance of the CutQC class from the circuit
     cutqc = CutQC(
-        name="%s_%d" % (circuit_type, circuit_size),
+        name="%s_%d" % (circuit_type, circuit_size), 
         circuit=circuit,
         
         # Set constraints for the subcircuits
         cutter_constraints={
-            "max_subcircuit_width": math.ceil(circuit.num_qubits / 4 * 3),
+            "max_subcircuit_width": 10,
             "max_subcircuit_cuts": 10,
             "subcircuit_size_imbalance": 2,
             "max_cuts": 10,

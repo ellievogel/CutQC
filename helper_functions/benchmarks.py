@@ -66,6 +66,7 @@ def construct_random(num_qubits, depth):
     return circuit
 
 
+# Helper function to generate a random circuit with a given type, depth, and number of qubits
 def generate_circ(num_qubits, depth, circuit_type, reg_name, connected_only, seed):
     random.seed(seed)
     full_circ = None
@@ -121,6 +122,7 @@ def generate_circ(num_qubits, depth, circuit_type, reg_name, connected_only, see
         else:
             raise Exception("Illegal circuit type:", circuit_type)
 
+        # Checks to make sure a valid circuit was generated and that it is connected
         if full_circ is not None and full_circ.num_tensor_factors() == 1:
             break
         elif full_circ is not None and not connected_only:

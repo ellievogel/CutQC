@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 # non_ibmq_functions.py
 
-=======
->>>>>>> refs/remotes/origin/main
 import copy
 import os
 import pickle
