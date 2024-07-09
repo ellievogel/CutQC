@@ -58,15 +58,15 @@ class CutQC:
         """
         if self.verbose:
             print("*" * 20, "Cut %s" % self.name, "*" * 20)
-            print(
-                "width = %d depth = %d size = %d -->"
-                % (
-                    self.circuit.num_qubits,
-                    self.circuit.depth(),
-                    self.circuit.num_nonlocal_gates(),
-                )
-            )
-            print(self.cutter_constraints)
+            # print(
+            #     "width = %d depth = %d size = %d -->"
+            #     % (
+            #         self.circuit.num_qubits,
+            #         self.circuit.depth(),
+            #         self.circuit.num_nonlocal_gates(),
+            #     )
+            # )
+            # print(self.cutter_constraints)
         cutter_begin = perf_counter()
         cut_solution = find_cuts(
             **self.cutter_constraints, circuit=self.circuit, verbose=self.verbose
@@ -86,8 +86,8 @@ class CutQC:
         eval_mode = sv: statevector simulation
         num_shots_fn: a function that gives the number of shots to take for a given circuit
         """
-        if self.verbose:
-            print("*" * 20, "evaluation mode = %s" % (eval_mode), "*" * 20)
+        # if self.verbose:
+        #     print("*" * 20, "evaluation mode = %s" % (eval_mode), "*" * 20)
         self.eval_mode = eval_mode
         self.num_shots_fn = num_shots_fn
 
@@ -96,14 +96,14 @@ class CutQC:
         self._attribute_shots()
         self.times["evaluate"] = perf_counter() - evaluate_begin
         if self.verbose:
-            print("evaluate took %e seconds" % self.times["evaluate"])
+            print(self.times["evaluate"])
 
     def build(self, mem_limit, recursion_depth):
         """
         mem_limit: memory limit during post process. 2^mem_limit is the largest vector
         """
-        if self.verbose:
-            print("--> Build %s" % (self.name))
+        # if self.verbose:
+        #     print("--> Build %s" % (self.name))
 
         # Keep these times and discard the rest
         self.times = {
@@ -130,7 +130,8 @@ class CutQC:
         self.times["build"] -= self.times["merge_states_into_bins"]
 
         if self.verbose:
-            print("Overhead = {}".format(self.overhead))
+            print(self.overhead.get("additions"))
+            print(self.overhead.get("multiplications"))
 
     def verify(self):
         verify_begin = perf_counter()
@@ -141,8 +142,8 @@ class CutQC:
             dd_bins=self.approximation_bins,
         )
         
-        print (f"Approximate Error: {self.approximation_error}")
-        print("verify took %.3f" % (perf_counter() - verify_begin))
+        # print (f"Approximate Error: {self.approximation_error}")
+        # print("verify took %.3f" % (perf_counter() - verify_begin))
 
     def clean_data(self):
         subprocess.run(["rm", "-r", self.tmp_data_folder])
@@ -158,21 +159,21 @@ class CutQC:
             self.subcircuit_entries,
             self.subcircuit_instances,
         ) = generate_subcircuit_entries(compute_graph=self.compute_graph)
-        if self.verbose:
-            print("--> %s subcircuit_entries:" % self.name)
-            for subcircuit_idx in self.subcircuit_entries:
-                print(
-                    "Subcircuit_%d has %d entries"
-                    % (subcircuit_idx, len(self.subcircuit_entries[subcircuit_idx]))
-                )
+        # if self.verbose:
+        #     # print("--> %s subcircuit_entries:" % self.name)
+        #     for subcircuit_idx in self.subcircuit_entries:
+        #         print(
+        #             "Subcircuit_%d has %d entries"
+        #             % (subcircuit_idx, len(self.subcircuit_entries[subcircuit_idx]))
+        #         )
 
     def _run_subcircuits(self):
         """
         Run all the subcircuit instances
         subcircuit_instance_probs[subcircuit_idx][(init,meas)] = measured prob
         """
-        if self.verbose:
-            print("--> Running Subcircuits %s" % self.name)
+        # if self.verbose:
+        #     print("--> Running Subcircuits %s" % self.name)
         if os.path.exists(self.tmp_data_folder):
             subprocess.run(["rm", "-r", self.tmp_data_folder])
         os.makedirs(self.tmp_data_folder)
@@ -189,8 +190,8 @@ class CutQC:
         Attribute the subcircuit_instance shots into respective subcircuit entries
         subcircuit_entry_probs[subcircuit_idx][entry_init, entry_meas] = entry_prob
         """
-        if self.verbose:
-            print("--> Attribute shots %s" % self.name)
+        # if self.verbose:
+        #     print("--> Attribute shots %s" % self.name)
         attribute_shots(
             subcircuit_entries=self.subcircuit_entries,
             subcircuits=self.subcircuits,

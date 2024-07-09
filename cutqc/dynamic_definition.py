@@ -34,6 +34,7 @@ class DynamicDefinition(object):
                 dd_bins[recursion_layer] =  {'subcircuit_state','upper_bin'}
         subcircuit_state[subcircuit_idx] = ['0','1','active','merged']
         """
+        build_begin = perf_counter()
         num_qubits = sum(
             [
                 self.compute_graph.nodes[subcircuit_idx]["effective"]
@@ -107,6 +108,9 @@ class DynamicDefinition(object):
                 )[: self.recursion_depth]
             self.times["sort"] += perf_counter() - sort_begin
             recursion_layer += 1
+
+        build_time = perf_counter() - build_begin
+        print(build_time)
 
     def initialize_dynamic_definition_schedule(self):
         schedule = {}

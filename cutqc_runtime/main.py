@@ -55,17 +55,17 @@ class CutQC:
         Else supply the subcircuit_vertices manually
         Note that supplying subcircuit_vertices overrides all other arguments
         """
-        if self.verbose:
-            print("*" * 20, "Cut %s" % self.name, "*" * 20)
-            print(
-                "width = %d depth = %d size = %d -->"
-                % (
-                    self.circuit.num_qubits,
-                    self.circuit.depth(),
-                    self.circuit.num_nonlocal_gates(),
-                )
-            )
-            print(self.cutter_constraints)
+        # if self.verbose:
+        #     print("*" * 20, "Cut %s" % self.name, "*" * 20)
+        #     print(
+        #         "width = %d depth = %d size = %d -->"
+        #         % (
+        #             self.circuit.num_qubits,
+        #             self.circuit.depth(),
+        #             self.circuit.num_nonlocal_gates(),
+        #         )
+        #     )
+        #     print(self.cutter_constraints)
         cutter_begin = perf_counter()
         cut_solution = find_cuts(
             **self.cutter_constraints, circuit=self.circuit, verbose=self.verbose
@@ -86,8 +86,8 @@ class CutQC:
         """
         mem_limit: memory limit during post process. 2^mem_limit is the largest vector
         """
-        if self.verbose:
-            print("--> Build %s" % (self.name))
+        # if self.verbose:
+        #     print("--> Build %s" % (self.name))
 
         # Keep these times and discard the rest
         self.times = {"cutter": self.times["cutter"]}

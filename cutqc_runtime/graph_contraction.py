@@ -35,9 +35,9 @@ class GraphContractor(object):
             num_active_qubits = qubit_states.count("active")
             length = int(2**num_active_qubits)
             self.reconstruction_length *= length
-            print(
-                "subcircuit %d : %d active qubits" % (subcircuit_idx, num_active_qubits)
-            )
+            # print(
+            #     "subcircuit %d : %d active qubits" % (subcircuit_idx, num_active_qubits)
+            # )
             self.subcircuit_entry_lengths[subcircuit_idx] = length
             self.pseudo_subcircuit_entry_probs[subcircuit_idx] = np.random.rand(
                 length

@@ -1,0 +1,20 @@
+******************** Cut hwea_10_18 ********************
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+2
+1
+11.920779665000737
+3.191097034025006
+1048576
+1310720
+
+ Performance counter stats for 'python example.py --circuit_size=18 --max_subcircuit_width=10 --circuit_type=hwea':
+
+           163,840      fp_arith_inst_retired.256b_packed_single:u                                   
+
+      21.466307825 seconds time elapsed
+
+      16.318224000 seconds user
+       3.556639000 seconds sys
+
+
