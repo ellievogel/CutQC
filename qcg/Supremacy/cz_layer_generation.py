@@ -93,7 +93,7 @@ def main():
     n = 4
     m = 6
     layers = get_layers(n, m)
-    print(layers)
+    # print(layers)
     # for i, l in enumerate(layers):
     #    for cz in l:
     #        print('{} cz {} {}'.format(i,get_row_major(n,m,cz[0]),
