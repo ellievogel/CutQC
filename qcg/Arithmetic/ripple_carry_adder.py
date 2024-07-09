@@ -202,4 +202,4 @@ class RCAdder:
 if __name__ == "__main__":
     adder = RCAdder(nbits=6, a=0, b=0, use_toffoli=True, measure=True)
     circ = adder.gen_circuit()
-    # print(circ)
+    print(circ)

@@ -194,4 +194,4 @@ if __name__ == "__main__":
     nb_qubits = 8
     hwea = HWEA(8, 1)
     qc = gen_circuit
-    # print(qc)
+    print(qc)
