@@ -48,7 +48,7 @@ def main(circuit_size, max_subcircuit_width, circuit_type):
     # print("-- Done Evaluating -- \n")
 
     # print("-- Build --")
-    cutqc.build(mem_limit=32, recursion_depth=1)
+    cutqc.build(mem_limit=128, recursion_depth=1)
     # print("-- Done Building -- \n")
     
     # cutqc.verify()

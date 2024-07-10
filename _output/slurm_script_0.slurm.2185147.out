@@ -1,0 +1,4 @@
+******************** Cut aqft_10_16 ********************
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+slurmstepd: error: *** JOB 2185147 ON adroit-h11n4 CANCELLED AT 2024-07-10T12:15:51 ***
