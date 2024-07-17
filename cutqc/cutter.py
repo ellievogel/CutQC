@@ -652,13 +652,13 @@ def find_cuts(
             break
         # elif verbose:
         #     print("%d subcircuits : NO SOLUTIONS" % (num_subcircuit))
-    if verbose and len(cut_solution) > 0:
-        # print("-" * 20)
-        print_cutter_result(
-            num_cuts=cut_solution["num_cuts"],
-            subcircuits=cut_solution["subcircuits"],
-            counter=cut_solution["counter"],
-        )
+    # if verbose and len(cut_solution) > 0:
+    #     # print("-" * 20)
+    #     print_cutter_result(
+    #         num_cuts=cut_solution["num_cuts"],
+    #         subcircuits=cut_solution["subcircuits"],
+    #         counter=cut_solution["counter"],
+    #     )
 
         #print("Model objective value = %.2e" % (mip_model.objective), flush=True)
         #print("MIP runtime:", mip_model.runtime, flush=True)
@@ -671,10 +671,10 @@ def find_cuts(
     return cut_solution
 
 
-def print_cutter_result(num_cuts, subcircuits, counter):
+# def print_cutter_result(num_cuts, subcircuits, counter):
     # print("Cutter result:")
-    print(len(subcircuits))
-    print(num_cuts)
+    # print(len(subcircuits))
+    # print(num_cuts)
 
     # for subcircuit_idx in range(len(subcircuits)):
     #     print("subcircuit %d" % subcircuit_idx)

@@ -28,7 +28,7 @@ class GraphContractor(object):
         self.num_cuts = num_cuts
         self.subcircuit_entry_lengths = {}
         self.pseudo_subcircuit_entry_probs = {}
-        print("%d cuts" % self.num_cuts)
+        # print("%d cuts" % self.num_cuts)
         self.reconstruction_length = 1
         for subcircuit_idx in dd_schedule["subcircuit_state"]:
             qubit_states = dd_schedule["subcircuit_state"][subcircuit_idx]

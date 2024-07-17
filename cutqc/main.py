@@ -95,8 +95,8 @@ class CutQC:
         self._run_subcircuits()
         self._attribute_shots()
         self.times["evaluate"] = perf_counter() - evaluate_begin
-        if self.verbose:
-            print(self.times["evaluate"])
+        # if self.verbose:
+        #     print(self.times["evaluate"])
 
     def build(self, mem_limit, recursion_depth):
         """
@@ -129,9 +129,9 @@ class CutQC:
         self.times["build"] += self.times["cutter"]
         self.times["build"] -= self.times["merge_states_into_bins"]
 
-        if self.verbose:
-            print(self.overhead.get("additions"))
-            print(self.overhead.get("multiplications"))
+        # if self.verbose:
+        #     print(self.overhead.get("additions"))
+        #     print(self.overhead.get("multiplications"))
 
     def verify(self):
         verify_begin = perf_counter()

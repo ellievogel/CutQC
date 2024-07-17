@@ -34,7 +34,6 @@ class DynamicDefinition(object):
                 dd_bins[recursion_layer] =  {'subcircuit_state','upper_bin'}
         subcircuit_state[subcircuit_idx] = ['0','1','active','merged']
         """
-        build_begin = perf_counter()
         num_qubits = sum(
             [
                 self.compute_graph.nodes[subcircuit_idx]["effective"]
@@ -43,6 +42,8 @@ class DynamicDefinition(object):
         )
         largest_bins = []  # [{recursion_layer, bin_id}]
         recursion_layer = 0
+        build_begin = perf_counter()
+        compute_time = 0
         while recursion_layer < self.recursion_depth:
             # print('-'*10,'Recursion Layer %d'%(recursion_layer),'-'*10)
             """Get qubit states"""
@@ -65,11 +66,14 @@ class DynamicDefinition(object):
             merged_subcircuit_entry_probs = self.merge_states_into_bins()
 
             """ Build from the merged subcircuit entries """
+            compute_section = perf_counter()
             graph_contractor = GraphContractor(
                 compute_graph=self.compute_graph,
                 subcircuit_entry_probs=merged_subcircuit_entry_probs,
                 num_cuts=self.num_cuts,
             )
+            compute_time = compute_time + (perf_counter() - compute_section)
+            
             reconstructed_prob = graph_contractor.reconstructed_prob
             smart_order = graph_contractor.smart_order
             recursion_overhead = graph_contractor.overhead
@@ -110,7 +114,8 @@ class DynamicDefinition(object):
             recursion_layer += 1
 
         build_time = perf_counter() - build_begin
-        print(build_time)
+        print(f"build: {build_time}")
+        print(f"compute: {compute_time}")
 
     def initialize_dynamic_definition_schedule(self):
         schedule = {}

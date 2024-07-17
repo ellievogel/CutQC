@@ -2,8 +2,8 @@
 NODES := 1                    # Node Count
 NTASKS := 1                   # total number of tasks across all nodes
 EMAIL := ev4939@princeton.edu # Output Email
-NCORES := 13                  # cpu-cores per task (>1 if multi-threaded tasks)
-MEM := 64G 										# memory per cpu-core (4G is default)
+NCORES := 64                  # cpu-cores per task (>1 if multi-threaded tasks)
+MEM := 7G 										# memory per cpu-core (4G is default)
 JNAME := cutqc
 
 # Directories

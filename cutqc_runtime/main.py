@@ -107,8 +107,8 @@ class CutQC:
         self.overhead = dd.overhead
         self.times["build"] = sum([self.times[field] for field in self.times])
 
-        if self.verbose:
-            print("Overhead = {}".format(self.overhead))
+        # if self.verbose:
+        #     print("Overhead = {}".format(self.overhead))
 
     def clean_data(self):
         subprocess.run(["rm", "-r", self.tmp_data_folder])
