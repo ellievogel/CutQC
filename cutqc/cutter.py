@@ -612,14 +612,14 @@ def find_cuts(
     cut_solution = {}
 
     for num_subcircuit in num_subcircuits:
-        # if (
-        #     num_subcircuit * max_subcircuit_width - (num_subcircuit - 1) < num_qubits
-        #     or num_subcircuit > num_qubits
-        #     or max_cuts + 1 < num_subcircuit
-        # ):
-        #     if verbose:
-        #         # print("%d subcircuits : IMPOSSIBLE" % (num_subcircuit))
-        #     continue
+        if (
+            num_subcircuit * max_subcircuit_width - (num_subcircuit - 1) < num_qubits
+            or num_subcircuit > num_qubits
+            or max_cuts + 1 < num_subcircuit
+        ):
+            if verbose:
+                # print("%d subcircuits : IMPOSSIBLE" % (num_subcircuit))
+                continue
         kwargs = dict(
             n_vertices=n_vertices,
             edges=edges,
@@ -652,13 +652,13 @@ def find_cuts(
             break
         # elif verbose:
         #     print("%d subcircuits : NO SOLUTIONS" % (num_subcircuit))
-    # if verbose and len(cut_solution) > 0:
-    #     # print("-" * 20)
-    #     print_cutter_result(
-    #         num_cuts=cut_solution["num_cuts"],
-    #         subcircuits=cut_solution["subcircuits"],
-    #         counter=cut_solution["counter"],
-    #     )
+    if verbose and len(cut_solution) > 0:
+        # print("-" * 20)
+        print_cutter_result(
+            num_cuts=cut_solution["num_cuts"],
+            subcircuits=cut_solution["subcircuits"],
+            counter=cut_solution["counter"],
+        )
 
         #print("Model objective value = %.2e" % (mip_model.objective), flush=True)
         #print("MIP runtime:", mip_model.runtime, flush=True)
@@ -671,22 +671,22 @@ def find_cuts(
     return cut_solution
 
 
-# def print_cutter_result(num_cuts, subcircuits, counter):
-    # print("Cutter result:")
-    # print(len(subcircuits))
-    # print(num_cuts)
+def print_cutter_result(num_cuts, subcircuits, counter):
+    print("Cutter result:")
+    print(len(subcircuits))
+    print(num_cuts)
 
-    # for subcircuit_idx in range(len(subcircuits)):
-    #     print("subcircuit %d" % subcircuit_idx)
-    #     print(
-    #         "\u03C1 qubits = %d, O qubits = %d, width = %d, effective = %d, depth = %d, size = %d"
-    #         % (
-    #             counter[subcircuit_idx]["rho"],
-    #             counter[subcircuit_idx]["O"],
-    #             counter[subcircuit_idx]["d"],
-    #             counter[subcircuit_idx]["effective"],
-    #             counter[subcircuit_idx]["depth"],
-    #             counter[subcircuit_idx]["size"],
-    #         )
-    #     )
-    #     print(subcircuits[subcircuit_idx])
+    for subcircuit_idx in range(len(subcircuits)):
+        print("subcircuit %d" % subcircuit_idx)
+        print(
+            "\u03C1 qubits = %d, O qubits = %d, width = %d, effective = %d, depth = %d, size = %d"
+            % (
+                counter[subcircuit_idx]["rho"],
+                counter[subcircuit_idx]["O"],
+                counter[subcircuit_idx]["d"],
+                counter[subcircuit_idx]["effective"],
+                counter[subcircuit_idx]["depth"],
+                counter[subcircuit_idx]["size"],
+            )
+        )
+        print(subcircuits[subcircuit_idx])

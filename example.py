@@ -32,24 +32,24 @@ def main(circuit_size, max_subcircuit_width, circuit_type):
             "max_subcircuit_cuts": 10,
             "subcircuit_size_imbalance": 2,
             "max_cuts": 10,
-            "num_subcircuits": [2, 3, 4, 5, 6],
+            "num_subcircuits": [2, 3, 4, 5, 6, 7, 8],
         },
         verbose=True,
     )
     
-    # print("-- Cut --")
+    print("-- Cut --")
     cutqc.cut()
     if not cutqc.has_solution:
         raise Exception("The input circuit and constraints have no viable cuts")
-    # print("-- Done Cutting -- \n")
+    print("-- Done Cutting -- \n")
     
-    # print("-- Evaluate --")
+    print("-- Evaluate --")
     cutqc.evaluate(eval_mode="sv", num_shots_fn=None)
-    # print("-- Done Evaluating -- \n")
+    print("-- Done Evaluating -- \n")
 
-    # print("-- Build --")
+    print("-- Build --")
     cutqc.build(mem_limit=128, recursion_depth=1)
-    # print("-- Done Building -- \n")
+    print("-- Done Building -- \n")
     
     # cutqc.verify()
     # print("Cut: %d recursions." % (cutqc.num_recursions))
