@@ -1,0 +1,141 @@
+******************** Cut supremacy_16 ********************
+width = 16 depth = 10 size = 24 -->
+{'max_subcircuit_width': 12, 'max_subcircuit_cuts': 10, 'subcircuit_size_imbalance': 2, 'max_cuts': 10, 'num_subcircuits': [2, 3]}
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+--------------------
+Cutter result:
+2 subcircuits, 4 cuts
+subcircuit 0
+ρ qubits = 1, O qubits = 3, width = 12, effective = 9, depth = 10, size = 67
+      ┌───┐     ┌─────────┐   ┌───┐              ┌─────────┐   ┌───┐   »
+ q_0: ┤ H ├──■──┤ Ry(π/2) ├───┤ T ├────────■─────┤ Rx(π/2) ├───┤ T ├───»
+      ├───┤  │  ├─────────┤   └───┘        │     └─────────┘   └───┘   »
+ q_1: ┤ H ├──■──┤ Ry(π/2) ├────────────────┼───────────────────────────»
+      ├───┤┌───┐└─────────┘┌─────────┐     │                ┌─────────┐»
+ q_2: ┤ H ├┤ T ├─────■─────┤ Rx(π/2) ├─────■──────────■─────┤ Rx(π/2) ├»
+      ├───┤├───┤     │     └─────────┘                │     └─────────┘»
+ q_3: ┤ H ├┤ T ├─────┼────────────────────────────────■────────────────»
+      ├───┤└───┘     │     ┌─────────┐   ┌───┐                         »
+ q_4: ┤ H ├──■───────■─────┤ Ry(π/2) ├───┤ T ├─────────────────────────»
+      ├───┤  │  ┌─────────┐└─────────┘   └───┘              ┌─────────┐»
+ q_5: ┤ H ├──■──┤ Rx(π/2) ├─────■─────────────────────■─────┤ Rx(π/2) ├»
+      └───┘     └─────────┘     │     ┌─────────┐     │     └─────────┘»
+ q_6: ──────────────────────────■─────┤ Rx(π/2) ├─────┼──────────■─────»
+      ┌───┐┌───┐                      └─────────┘     │          │     »
+ q_7: ┤ H ├┤ T ├───────────────────────────■──────────┼──────────■─────»
+      ├───┤├───┤                           │          │                »
+ q_8: ┤ H ├┤ T ├───────────────────────────┼──────────┼──────────■─────»
+      ├───┤├───┤                           │          │          │     »
+ q_9: ┤ H ├┤ T ├───────────────────────────┼──────────■──────────■─────»
+      ├───┤└───┘┌─────────┐   ┌───┐        │                           »
+q_10: ┤ H ├──■──┤ Rx(π/2) ├───┤ T ├────────┼───────────────────────────»
+      ├───┤  │  ├─────────┤   ├───┤        │     ┌─────────┐   ┌───┐   »
+q_11: ┤ H ├──■──┤ Ry(π/2) ├───┤ T ├────────■─────┤ Rx(π/2) ├───┤ T ├───»
+      └───┘     └─────────┘   └───┘              └─────────┘   └───┘   »
+«         ┌───┐                                        
+« q_0: ───┤ H ├────────────────────────────────────────
+«         └───┘                                        
+« q_1: ────────────────────────────────────────────────
+«         ┌───┐      ┌───┐                             
+« q_2: ───┤ T ├──────┤ H ├─────────────────────────────
+«         └───┘      └───┘                             
+« q_3: ─────■──────────────────────────────────────────
+«           │                                ┌───┐     
+« q_4: ─────┼─────────────────────────────■──┤ H ├─────
+«           │     ┌─────────┐   ┌───┐     │  ├───┤     
+« q_5: ─────■─────┤ Rx(π/2) ├───┤ T ├─────┼──┤ H ├─────
+«      ┌─────────┐└──┬───┬──┘   └───┘     │  └───┘┌───┐
+« q_6: ┤ Ry(π/2) ├───┤ T ├────────────────┼────■──┤ H ├
+«      └─────────┘   └───┘                │    │  └───┘
+« q_7: ───────────────────────────────────┼────┼───────
+«      ┌─────────┐   ┌───┐                │    │  ┌───┐
+« q_8: ┤ Rx(π/2) ├───┤ T ├────────────────■────┼──┤ H ├
+«      ├─────────┤   └───┘   ┌─────────┐┌───┐  │  └───┘
+« q_9: ┤ Ry(π/2) ├─────■─────┤ Rx(π/2) ├┤ H ├──┼───────
+«      └─────────┘     │     └─────────┘└───┘  │  ┌───┐
+«q_10: ────────────────■───────────────────────■──┤ H ├
+«         ┌───┐                                   └───┘
+«q_11: ───┤ H ├────────────────────────────────────────
+«         └───┘                                        
+subcircuit 1
+ρ qubits = 3, O qubits = 1, width = 8, effective = 7, depth = 10, size = 39
+                          ┌─────────┐   ┌───┐                                 »
+q_0: ───────────────■─────┤ Ry(π/2) ├───┤ T ├─────────────────────────────────»
+     ┌───┐┌───┐     │     └─────────┘   └───┘                 ┌─────────┐┌───┐»
+q_1: ┤ H ├┤ T ├─────■────────────────────────────■──────■─────┤ Ry(π/2) ├┤ T ├»
+     ├───┤├───┤                                  │      │     ├─────────┤├───┤»
+q_2: ┤ H ├┤ T ├──────────────────────────────────┼──────■─────┤ Ry(π/2) ├┤ T ├»
+     └───┘└───┘                                  │            └─────────┘└───┘»
+q_3: ────────────────────────────────────────────┼─────────────────────────■──»
+     ┌───┐                           ┌─────────┐ │ ┌─────────┐   ┌───┐     │  »
+q_4: ┤ H ├──■──────────────────■─────┤ Ry(π/2) ├─■─┤ Ry(π/2) ├───┤ T ├─────■──»
+     ├───┤  │  ┌─────────┐     │     └──┬───┬──┘   ├─────────┤   └───┘        »
+q_5: ┤ H ├──■──┤ Rx(π/2) ├─────┼────────┤ T ├────■─┤ Ry(π/2) ├────────────────»
+     ├───┤┌───┐└─────────┘     │        └───┘    │ └─────────┘                »
+q_6: ┤ H ├┤ T ├────────────────■─────────────────┼────────────────────────────»
+     └───┘└───┘                                  │ ┌─────────┐   ┌───┐   ┌───┐»
+q_7: ────────────────────────────────────────────■─┤ Rx(π/2) ├───┤ T ├───┤ H ├»
+                                                   └─────────┘   └───┘   └───┘»
+«                     ┌───┐     
+«q_0: ─────────────■──┤ H ├─────
+«        ┌───┐     │  └───┘     
+«q_1: ───┤ H ├─────┼────────────
+«        └───┘     │       ┌───┐
+«q_2: ─────────────┼────■──┤ H ├
+«                  │    │  ├───┤
+«q_3: ─────────────■────┼──┤ H ├
+«     ┌─────────┐┌───┐  │  └───┘
+«q_4: ┤ Ry(π/2) ├┤ H ├──┼───────
+«     └─────────┘└───┘  │  ┌───┐
+«q_5: ──────────────────■──┤ H ├
+«                          └───┘
+«q_6: ──────────────────────────
+«                               
+«q_7: ──────────────────────────
+«                               
+Model objective value = 4.00e+00
+MIP runtime: 0.05747699737548828
+OPTIMAL, MIP gap = 0.0
+--------------------
+/home/ev4939/projects/CutQC_Contributions/qcg/Supremacy/Qgrid_Sycamore.py:136: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if gate is "X":
+/home/ev4939/projects/CutQC_Contributions/qcg/Supremacy/Qgrid_Sycamore.py:139: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif gate is "Y":
+/home/ev4939/projects/CutQC_Contributions/qcg/Supremacy/Qgrid_Sycamore.py:142: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif gate is "W":
+/home/ev4939/projects/CutQC_Contributions/qcg/Dynamics/quantum_dynamics.py:78: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if pauli is "X":
+/home/ev4939/projects/CutQC_Contributions/qcg/Dynamics/quantum_dynamics.py:80: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif pauli is "Y":
+/home/ev4939/projects/CutQC_Contributions/qcg/Dynamics/quantum_dynamics.py:95: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if pauli is "X":
+/home/ev4939/projects/CutQC_Contributions/qcg/Dynamics/quantum_dynamics.py:97: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif pauli is "Y":
+/home/ev4939/projects/CutQC_Contributions/qcg/BernsteinVazirani/bernstein_vazirani.py:83: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if bit is "1":
+/home/ev4939/projects/CutQC_Contributions/qcg/Arithmetic/ripple_carry_adder.py:114: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if val is "1":
+--> supremacy_16 subcircuit_entries:
+Subcircuit_0 has 256 entries
+Subcircuit_1 has 256 entries
+******************** evaluation mode = sv ********************
+--> Running Subcircuits supremacy_16
+--> Attribute shots supremacy_16
+evaluate took 6.051052e+00 seconds
+--> Build supremacy_16
+Overhead = {'additions': 16711680, 'multiplications': 16777216}
+Cut: 1 recursions.
+{0: {'subcircuit_state': {0: ['active', 'active', 'active', 'active', 'active', 'active', 'active', 'active', 'active'], 1: ['active', 'active', 'active', 'active', 'active', 'active', 'active']}, 'upper_bin': None, 'smart_order': [1, 0], 'bins': array([8.2977522e-06, 4.5359443e-06, 7.2184475e-06, ..., 8.0825666e-06,
+       1.2824925e-05, 5.7985981e-06], dtype=float32), 'expanded_bins': []}}
+
+ Performance counter stats for 'python example.py --circuit_size=12 --max_subcircuit_width=10 --circuit_type=supremacy':
+
+         2,097,154      fp_arith_inst_retired.256b_packed_single:u                                   
+
+      11.806747848 seconds time elapsed
+
+     113.332371000 seconds user
+      35.132991000 seconds sys
+
+
