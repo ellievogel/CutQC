@@ -3,11 +3,7 @@ import subprocess
 
 # Define the sets of variables
 variable_sets = [
-    {'circuit_size': 22, 'max_subcircuit_width': 20, 'circuit_type': 'adder'},
-    {'circuit_size': 24, 'max_subcircuit_width': 20, 'circuit_type': 'adder'},
-    {'circuit_size': 26, 'max_subcircuit_width': 20, 'circuit_type': 'adder'},
-    {'circuit_size': 28, 'max_subcircuit_width': 20, 'circuit_type': 'adder'},
-    {'circuit_size': 30, 'max_subcircuit_width': 20, 'circuit_type': 'adder'}
+    {'circuit_size': 30, 'max_subcircuit_width': 20, 'circuit_type': 'aqft'}
 ]
 
 # Read the SLURM script template

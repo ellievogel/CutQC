@@ -1,0 +1,114 @@
+-- Cut --
+******************** Cut supremacy_10_12 ********************
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+/scratch/network/ev4939/projects/CutQC/qcg/Supremacy/Qgrid_Sycamore.py:136: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if gate is "X":
+/scratch/network/ev4939/projects/CutQC/qcg/Supremacy/Qgrid_Sycamore.py:139: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif gate is "Y":
+/scratch/network/ev4939/projects/CutQC/qcg/Supremacy/Qgrid_Sycamore.py:142: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif gate is "W":
+/scratch/network/ev4939/projects/CutQC/qcg/Dynamics/quantum_dynamics.py:78: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if pauli is "X":
+/scratch/network/ev4939/projects/CutQC/qcg/Dynamics/quantum_dynamics.py:80: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif pauli is "Y":
+/scratch/network/ev4939/projects/CutQC/qcg/Dynamics/quantum_dynamics.py:95: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if pauli is "X":
+/scratch/network/ev4939/projects/CutQC/qcg/Dynamics/quantum_dynamics.py:97: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif pauli is "Y":
+/scratch/network/ev4939/projects/CutQC/qcg/BernsteinVazirani/bernstein_vazirani.py:83: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if bit is "1":
+/scratch/network/ev4939/projects/CutQC/qcg/Arithmetic/ripple_carry_adder.py:114: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if val is "1":
+Cutter result:
+2
+3
+subcircuit 0
+ρ qubits = 3, O qubits = 0, width = 7, effective = 7, depth = 10, size = 40
+        ┌───┐        ┌─────────┐┌───┐                      ┌─────────┐»
+q_0: ───┤ H ├─────■──┤ Rx(π/2) ├┤ T ├────────────────■─────┤ Ry(π/2) ├»
+        ├───┤     │  ├─────────┤└───┘┌─────────┐     │     └──┬───┬──┘»
+q_1: ───┤ H ├─────■──┤ Ry(π/2) ├──■──┤ Ry(π/2) ├─────┼────────┤ T ├───»
+        ├───┤   ┌───┐└─────────┘  │  └─────────┘     │     ┌──┴───┴──┐»
+q_2: ───┤ H ├───┤ T ├─────────────■───────■──────────┼─────┤ Ry(π/2) ├»
+     ┌──┴───┴──┐└───┘                     │          │     └─────────┘»
+q_3: ┤ Rx(π/2) ├──────────────────────────┼──────────■──────────■─────»
+     └──┬───┬──┘┌───┐                     │                     │     »
+q_4: ───┤ H ├───┤ T ├─────────────────────┼─────────────────────■─────»
+     ┌──┴───┴──┐└───┘                     │     ┌─────────┐   ┌───┐   »
+q_5: ┤ Rx(π/2) ├──────────────────────────■─────┤ Rx(π/2) ├───┤ T ├───»
+     ├─────────┤                                └─────────┘   └───┘   »
+q_6: ┤ Rx(π/2) ├──────────────────────────────────────────────────────»
+     └─────────┘                                                      »
+«        ┌───┐      ┌───┐                        
+«q_0: ───┤ T ├──────┤ H ├────────────────────────
+«        └───┘      └───┘                   ┌───┐
+«q_1: ───────────────────────────────────■──┤ H ├
+«        ┌───┐      ┌───┐                │  └───┘
+«q_2: ───┤ T ├──────┤ H ├────────────────┼───────
+«     ┌──┴───┴──┐   ├───┤      ┌───┐     │       
+«q_3: ┤ Rx(π/2) ├───┤ T ├──────┤ H ├─────┼───────
+«     └─────────┘   └───┘      └───┘     │  ┌───┐
+«q_4: ─────■──────────■──────────────────■──┤ H ├
+«          │          │     ┌─────────┐┌───┐└───┘
+«q_5: ─────┼──────────■─────┤ Ry(π/2) ├┤ H ├─────
+«          │     ┌─────────┐└──┬───┬──┘├───┤     
+«q_6: ─────■─────┤ Ry(π/2) ├───┤ T ├───┤ H ├─────
+«                └─────────┘   └───┘   └───┘     
+subcircuit 1
+ρ qubits = 0, O qubits = 3, width = 8, effective = 5, depth = 10, size = 37
+     ┌───┐┌───┐                                                            »
+q_0: ┤ H ├┤ T ├─────■──────────────────────────────────────────────────────»
+     ├───┤├───┤     │                                                      »
+q_1: ┤ H ├┤ T ├─────┼──────■───────────────────────────────────────────────»
+     ├───┤└───┘     │      │ ┌─────────┐   ┌───┐                           »
+q_2: ┤ H ├──■───────■──────┼─┤ Rx(π/2) ├───┤ T ├───────────────────────────»
+     ├───┤  │  ┌─────────┐ │ └─────────┘   └───┘                           »
+q_3: ┤ H ├──■──┤ Ry(π/2) ├─┼──────■─────────────────■──────────────────────»
+     ├───┤┌───┐└─────────┘ │      │     ┌─────────┐ │ ┌───┐                »
+q_4: ┤ H ├┤ T ├────────────■──────■─────┤ Rx(π/2) ├─┼─┤ T ├────────────────»
+     ├───┤├───┤                         └─────────┘ │ └───┘┌─────────┐┌───┐»
+q_5: ┤ H ├┤ T ├─────────────────────────────────────┼───■──┤ Ry(π/2) ├┤ T ├»
+     ├───┤├───┤                                     │   │  ├─────────┤└───┘»
+q_6: ┤ H ├┤ T ├─────────────────────────────────────■───■──┤ Ry(π/2) ├──■──»
+     ├───┤├───┤                                            └─────────┘  │  »
+q_7: ┤ H ├┤ T ├─────────────────────────────────────────────────────────■──»
+     └───┘└───┘                                                            »
+«                          
+«q_0: ─────────────────────
+«                          
+«q_1: ─────────────────────
+«                ┌───┐     
+«q_2: ─────■─────┤ H ├─────
+«          │     └───┘     
+«q_3: ─────┼───────────────
+«          │          ┌───┐
+«q_4: ─────┼───────■──┤ H ├
+«          │       │  ├───┤
+«q_5: ─────■───────┼──┤ H ├
+«     ┌─────────┐  │  ├───┤
+«q_6: ┤ Rx(π/2) ├──┼──┤ H ├
+«     └─────────┘  │  ├───┤
+«q_7: ─────────────■──┤ H ├
+«                     └───┘
+-- Done Cutting -- 
+
+-- Evaluate --
+-- Done Evaluating -- 
+
+-- Build --
+build: 35.93973515997641
+compute: 0.14590881811454892
+-- Done Building -- 
+
+
+ Performance counter stats for 'python example.py --circuit_size=12 --max_subcircuit_width=10 --circuit_type=supremacy':
+
+            33,280      fp_arith_inst_retired.256b_packed_single:u                                   
+
+     179.124232702 seconds time elapsed
+
+     145.910765000 seconds user
+      30.480172000 seconds sys
+
+
