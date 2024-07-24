@@ -1,0 +1,44 @@
+MASTER_ADDR=adroit-h11g2
+MASTER_PORT=65500
+WORLD_SIZE=2
+2024-07-24 13:03:45.325913: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File "cut_and_eval.py", line 11, in <module>
+    from cutqc.main import CutQC 
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 5, in <module>
+    from abstract_graph_contractor import AbstractGraphContractor
+ModuleNotFoundError: No module named 'abstract_graph_contractor'
+2024-07-24 13:03:50.262678: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-07-24 13:03:50.262678: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-07-24 13:03:50.298780: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:03:50.298780: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:03:51.381563: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-07-24 13:03:51.381564: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File "dist_run.py", line 5, in <module>
+    from cutqc.main import CutQC
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 5, in <module>
+    from abstract_graph_contractor import AbstractGraphContractor
+ModuleNotFoundError: No module named 'abstract_graph_contractor'
+Traceback (most recent call last):
+  File "dist_run.py", line 5, in <module>
+    from cutqc.main import CutQC
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 5, in <module>
+    from abstract_graph_contractor import AbstractGraphContractor
+ModuleNotFoundError: No module named 'abstract_graph_contractor'
+srun: error: adroit-h11g2: tasks 0-1: Exited with exit code 1
+srun: Terminating StepId=2203979.0

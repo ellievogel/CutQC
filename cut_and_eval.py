@@ -16,9 +16,9 @@ def get_args ():
     parser = argparse.ArgumentParser(description='Optional app description')    
     
     # Required positional argument
-    parser.add_argument('circuit_type', type=str, nargs='?')
-    parser.add_argument('circuit_size', type=int, nargs='?')
-    parser.add_argument('max_width', type=int, nargs='?')
+    parser.add_argument('--circuit_type', type=str, nargs='?')
+    parser.add_argument('--circuit_size', type=int, nargs='?')
+    parser.add_argument('--max_subcircuit_width', type=int, nargs='?')
     args = parser.parse_args ()
 
     return args
@@ -29,10 +29,10 @@ if __name__ == "__main__":
 
     circuit_type = args.circuit_type
     circuit_size = args.circuit_size
-    max_width = args.max_width
+    max_subcircuit_width = args.max_subcircuit_width
     verbose = False
     
-    filename = "{}_{}_{}.pkl".format (circuit_type, circuit_size, max_width)
+    filename = "{}_{}_{}.pkl".format (circuit_type, circuit_size, max_subcircuit_width)
     print (f'--- Cutting and Evalualting {filename} --- ')
 
     circuit = generate_circ(
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         name="%s_%d" % (circuit_type, circuit_size),
         circuit=circuit,
         cutter_constraints={
-            "max_subcircuit_width": max_width,
+            "max_subcircuit_width": max_subcircuit_width,
             "max_subcircuit_cuts": 100,
             "subcircuit_size_imbalance": 2,
             "max_cuts": 10,

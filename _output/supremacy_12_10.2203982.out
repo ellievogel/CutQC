@@ -1,0 +1,80 @@
+MASTER_ADDR=adroit-h11g3
+MASTER_PORT=16410
+WORLD_SIZE=2
+2024-07-24 13:07:33.486662: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Cutting and Evalualting supremacy_12_10.pkl --- 
+-- Cut -- 
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+-- Done Cutting -- 
+
+-- Evaluate --
+-- Done Evaluating -- 
+
+-- Dumping CutQC Object into supremacy_12_10.pkl --
+2024-07-24 13:08:36.156259: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:08:36.157295: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:08:37.094572: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-07-24 13:08:37.094683: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 0
+World Rank: 0
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 0. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+subcircuit_entry_lengh: [32, 128]
+batches Host: (tensor([[[ 0.0312,  0.0312,  0.0312,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0876,  0.0797,  0.0485,  ...,  0.0687,  0.0374,  0.0674]],
+
+        [[-0.0023,  0.0023,  0.0023,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0009, -0.0009,  0.0101,  ..., -0.0009,  0.0101, -0.0101]],
+
+        [[-0.0150,  0.0150,  0.0150,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0725,  0.0536,  0.0315,  ..., -0.0458, -0.0237, -0.0582]],
+
+        ...,
+
+        [[ 0.0039, -0.0039,  0.0228,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0055, -0.0055, -0.0055,  ..., -0.0055, -0.0055,  0.0055]],
+
+        [[-0.0011,  0.0011, -0.0067,  ...,  0.0000,  0.0000,  0.0000],
+         [-0.0273,  0.0273, -0.0039,  ...,  0.0117, -0.0195,  0.0195]],
+
+        [[-0.0228, -0.0228, -0.0039,  ...,  0.0000,  0.0000,  0.0000],
+         [-0.0083,  0.0083, -0.0138,  ..., -0.0193,  0.0028, -0.0028]]]),)
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 1
+World Rank: 1
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 1. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+TENSORSIZES SHAPE 2
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "dist_run.py", line 66, in <module>
+[rank0]:     init_processes(args=args)
+[rank0]:   File "dist_run.py", line 47, in init_processes
+[rank0]:     run(args)
+[rank0]:   File "dist_run.py", line 35, in run
+[rank0]:     compute_time = cutqc.build(mem_limit=32, recursion_depth=1)
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 165, in build
+[rank0]:     self.dd.build ()
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 75, in build
+[rank0]:     reconstructed_prob = self.graph_contractor.reconstruct (
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 18, in reconstruct
+[rank0]:     res = self._compute()    
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/distributed_graph_contraction.py", line 97, in _compute
+[rank0]:     self.overhead["additions"] / counter * 4 ** len(edges)
+[rank0]: AttributeError: 'DistributedGraphContractor' object has no attribute 'overhead'
+srun: error: adroit-h11g3: task 0: Exited with exit code 1
+srun: Terminating StepId=2203982.0
+slurmstepd: error: *** STEP 2203982.0 ON adroit-h11g3 CANCELLED AT 2024-07-24T13:09:07 ***
+srun: error: adroit-h11g3: task 1: Terminated
+srun: Force Terminated StepId=2203982.0

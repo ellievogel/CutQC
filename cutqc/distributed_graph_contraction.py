@@ -14,13 +14,13 @@ import torch.distributed as dist
 
 from helper_functions.metrics import MSE
 from cutqc.post_process_helper import ComputeGraph
+from cutqc.abstract_graph_contractor import AbstractGraphContractor
 
 # TODO: Support for more distributed schedulers other then slurm.
-# TODO: Make a general graph contractor class and inherit from it. - Ellie
 
 __host_machine__ = 0
 
-class DistributedGraphContractor(object):
+class DistributedGraphContractor(AbstractGraphContractor):
     def __init__(self, local_rank=None) -> None: 
         # Starts main worker loop
         self.local_rank = local_rank
@@ -36,24 +36,7 @@ class DistributedGraphContractor(object):
         self.subcircuit_entry_probs = None
         self.num_cuts = None
         self.reconstructed_prob = None
-        
-    def reconstruct(self, compute_graph: ComputeGraph, subcircuit_entry_probs: dict, num_cuts: int) -> None:
-        '''
-        Performs subcircuit reconstruction.                 
-        '''
-        # Set up Graph Contractor for contraction
-        self.compute_graph = compute_graph
-        self.subcircuit_entry_probs = subcircuit_entry_probs
-        self.num_cuts = num_cuts
-        self._set_smart_order()
         self.overhead = {"additions": 0, "multiplications": 0}
-        
-        start_time = perf_counter()
-        res = self._compute()    
-        end_time = perf_counter() - start_time
-        self.times['compute'] += end_time
-        
-        return res 
 
     def terminate_distributed_process(self):
         '''
@@ -70,7 +53,7 @@ class DistributedGraphContractor(object):
     def _set_smart_order(self) -> None:
         '''
         Sets the order in which Kronecker products are computed. Specifically, 
-        the order is to sort by greedy subcircuit or der.
+        the order is to sort by greedy-subcircuit-order.
         '''
 
         # Retrieve list of all subcircuit lengths
@@ -95,6 +78,7 @@ class DistributedGraphContractor(object):
         '''
         Performs distributed graph contraction. Returns the reconstructed probability
         '''   
+        partial_compute_begin = perf_counter()
         edges = self.compute_graph.get_edges(from_node=None, to_node=None)
 
         # Assemble sequence of uncomputed kronecker products, to distribute to nodes later
@@ -109,10 +93,19 @@ class DistributedGraphContractor(object):
         self.compute_graph.remove_bases_from_edges(edges=self.compute_graph.edges)
         
         # Distribute and Execute reconstruction on nodes
-        
         num_batches = dist.get_world_size() - 1 # No batch for host
         reconstructed_prob = self._send_distributed(summation_terms_sequence, num_batches)
+        partial_compute_time = perf_counter() - partial_compute_begin
 
+        self.times["compute"] = (
+            partial_compute_time / counter * 4 ** len(edges)
+        )
+        self.overhead["additions"] = int(
+            self.overhead["additions"] / counter * 4 ** len(edges)
+        )
+        self.overhead["multiplications"] = int(
+            self.overhead["multiplications"] / counter * 4 ** len(edges)
+        )
         return reconstructed_prob.cpu().numpy()
             
     def _send_distributed(self, dataset: List[torch.Tensor], num_batches: int) -> torch.Tensor:
@@ -146,15 +139,6 @@ class DistributedGraphContractor(object):
         
         dist.reduce(output_buff, dst=0, op=dist.ReduceOp.SUM)
         return torch.mul(output_buff, (1/2**self.num_cuts))
-
-    def _get_subcircuit_entry_prob(self, subcircuit_idx: int):
-        """
-        Returns The subcircuit Entry Probability for the subcircuit at index
-        'SUBCIRCUIT_IDX' 
-        """
-
-        subcircuit_entry_init_meas = self.compute_graph.get_init_meas(subcircuit_idx)
-        return self.subcircuit_entry_probs[subcircuit_idx][subcircuit_entry_init_meas]
 
     def _get_paulibase_probability(self, edge_bases: tuple, edges: list):
         """

@@ -10,6 +10,7 @@ from helper_functions.metrics import MSE
 from cutqc.evaluator import get_num_workers
 from cutqc.graph_contraction import GraphContractor
 from cutqc.distributed_graph_contraction import DistributedGraphContractor
+from cutqc.abstract_graph_contractor import AbstractGraphContractor
 from cutqc.helper_fun import add_times
 from cutqc.post_process_helper import get_reconstruction_qubit_order
 
@@ -27,6 +28,7 @@ class DynamicDefinition(object):
         self.recursion_depth = recursion_depth
         self.dd_bins = {}
         self.local_rank = local_rank
+        # Creating graph contractor object - same base class attribute
         self.graph_contractor = DistributedGraphContractor (local_rank=self.local_rank) if (parallel_reconstruction) else GraphContractor()
         self.parallel_reconstruction = parallel_reconstruction
 
@@ -75,6 +77,8 @@ class DynamicDefinition(object):
                 subcircuit_entry_probs=merged_subcircuit_entry_probs,
                 num_cuts=self.num_cuts,
                 )
+
+            print('reconstruct works')
         
             
             smart_order = self.graph_contractor.smart_order

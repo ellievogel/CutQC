@@ -1,0 +1,64 @@
+MASTER_ADDR=adroit-h11g3
+MASTER_PORT=63036
+WORLD_SIZE=2
+2024-07-24 13:04:48.370486: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Cutting and Evalualting supremacy_12_10.pkl --- 
+-- Cut -- 
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+-- Done Cutting -- 
+
+-- Evaluate --
+-- Done Evaluating -- 
+
+-- Dumping CutQC Object into supremacy_12_10.pkl --
+2024-07-24 13:05:50.785884: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:05:50.786347: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:05:51.724943: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-07-24 13:05:51.725017: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 1
+World Rank: 1
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 1. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 0
+World Rank: 0
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 0. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "dist_run.py", line 66, in <module>
+[rank0]:     init_processes(args=args)
+[rank0]:   File "dist_run.py", line 47, in init_processes
+[rank0]:     run(args)
+[rank0]:   File "dist_run.py", line 35, in run
+[rank0]:     compute_time = cutqc.build(mem_limit=32, recursion_depth=1)
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 156, in build
+[rank0]:     self.dd = DynamicDefinition(
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 33, in __init__
+[rank0]:     self.abstract_graph_contractor = AbstractGraphContractor (local_rank=(self.local_rank))
+[rank0]: TypeError: AbstractGraphContractor() takes no arguments
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "dist_run.py", line 66, in <module>
+[rank1]:     init_processes(args=args)
+[rank1]:   File "dist_run.py", line 47, in init_processes
+[rank1]:     run(args)
+[rank1]:   File "dist_run.py", line 35, in run
+[rank1]:     compute_time = cutqc.build(mem_limit=32, recursion_depth=1)
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 156, in build
+[rank1]:     self.dd = DynamicDefinition(
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 33, in __init__
+[rank1]:     self.abstract_graph_contractor = AbstractGraphContractor (local_rank=(self.local_rank))
+[rank1]: TypeError: AbstractGraphContractor() takes no arguments
+srun: error: adroit-h11g3: tasks 0-1: Exited with exit code 1
+srun: Terminating StepId=2203980.0

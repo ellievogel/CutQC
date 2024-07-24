@@ -1,0 +1,141 @@
+MASTER_ADDR=adroit-h11g3
+MASTER_PORT=18980
+WORLD_SIZE=2
+--- Cutting and Evalualting supremacy_12_10.pkl --- 
+-- Cut -- 
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+-- Done Cutting -- 
+
+-- Evaluate --
+-- Done Evaluating -- 
+
+-- Dumping CutQC Object into supremacy_12_10.pkl --
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 0
+World Rank: 0
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 0. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+subcircuit_entry_lengh: [32, 128]
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "dist_run.py", line 66, in <module>
+[rank0]:     init_processes(args=args)
+[rank0]:   File "dist_run.py", line 47, in init_processes
+[rank0]:     run(args)
+[rank0]:   File "dist_run.py", line 35, in run
+[rank0]:     compute_time = cutqc.build(mem_limit=32, recursion_depth=1)
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 165, in build
+[rank0]:     self.dd.build ()
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 76, in build
+[rank0]:     reconstructed_prob = self.abstract_graph_contractor.reconstruct (
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 54, in reconstruct
+[rank0]:     res = self._compute()
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 80, in _compute
+[rank0]:     summation_term = self._get_paulibase_probability(edge_bases, edges)
+[rank0]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 277, in _get_paulibase_probability
+[rank0]:     subcircuit_entry_prob = self._get_subcircuit_entry_prob(subcircuit_idx)
+[rank0]: AttributeError: 'AbstractGraphContractor' object has no attribute '_get_subcircuit_entry_prob'
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 1
+World Rank: 1
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 1. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "dist_run.py", line 66, in <module>
+[rank1]:     init_processes(args=args)
+[rank1]:   File "dist_run.py", line 47, in init_processes
+[rank1]:     run(args)
+[rank1]:   File "dist_run.py", line 35, in run
+[rank1]:     compute_time = cutqc.build(mem_limit=32, recursion_depth=1)
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 156, in build
+[rank1]:     self.dd = DynamicDefinition(
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 33, in __init__
+[rank1]:     self.abstract_graph_contractor = AbstractGraphContractor (local_rank=(self.local_rank))
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 32, in __init__
+[rank1]:     if dist.get_rank() != __host_machine__: self._initiate_worker_loop()
+[rank1]:   File "/scratch/network/ev4939/projects/CutQC/cutqc/abstract_graph_contractor.py", line 200, in _initiate_worker_loop
+[rank1]:     dist.recv(tensor=tensor_sizes_shape, src=__host_machine__)     
+[rank1]:   File "/home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 75, in wrapper
+[rank1]:     return func(*args, **kwargs)
+[rank1]:   File "/home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1929, in recv
+[rank1]:     pg.recv([tensor], src, tag).wait()
+[rank1]: torch.distributed.DistBackendError: [1] is setting up NCCL communicator and retrieving ncclUniqueId from [0] via c10d key-value store by key '0:1', but store->get('0:1') got error: Connection reset by peer
+[rank1]: Exception raised from recvBytes at ../torch/csrc/distributed/c10d/Utils.hpp:672 (most recent call first):
+[rank1]: frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x57 (0x15542e0cc897 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libc10.so)
+[rank1]: frame #1: <unknown function> + 0x5b3a23e (0x155467be623e in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #2: c10d::TCPStore::doWait(c10::ArrayRef<std::string>, std::chrono::duration<long, std::ratio<1l, 1000l> >) + 0x2c7 (0x155467be0c87 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #3: c10d::TCPStore::doGet(std::string const&) + 0x32 (0x155467be0f82 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #4: c10d::TCPStore::get(std::string const&) + 0xa1 (0x155467be1fd1 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #5: c10d::PrefixStore::get(std::string const&) + 0x31 (0x155467b96371 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #6: c10d::PrefixStore::get(std::string const&) + 0x31 (0x155467b96371 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #7: c10d::PrefixStore::get(std::string const&) + 0x31 (0x155467b96371 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #8: c10d::ProcessGroupNCCL::broadcastUniqueNCCLID(ncclUniqueId*, bool, std::string const&, int) + 0xa9 (0x15542f3a6189 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+[rank1]: frame #9: c10d::ProcessGroupNCCL::getNCCLComm(std::string const&, c10::Device&, c10d::OpType, int, bool) + 0xc50 (0x15542f3ad610 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+[rank1]: frame #10: c10d::ProcessGroupNCCL::recv(std::vector<at::Tensor, std::allocator<at::Tensor> >&, int, int) + 0x5f8 (0x15542f3cc978 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+[rank1]: frame #11: <unknown function> + 0x5adc309 (0x155467b88309 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #12: <unknown function> + 0x5ae6f10 (0x155467b92f10 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #13: <unknown function> + 0x5ae6fa5 (0x155467b92fa5 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #14: <unknown function> + 0x5124446 (0x1554671d0446 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #15: <unknown function> + 0x1acf4b8 (0x155463b7b4b8 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #16: <unknown function> + 0x5aee004 (0x155467b9a004 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #17: <unknown function> + 0x5af36b5 (0x155467b9f6b5 in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so)
+[rank1]: frame #18: <unknown function> + 0xd24e9e (0x15547a77be9e in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_python.so)
+[rank1]: frame #19: <unknown function> + 0x47cf1f (0x155479ed3f1f in /home/ev4939/.conda/envs/cutqc/lib/python3.8/site-packages/torch/lib/libtorch_python.so)
+[rank1]: frame #20: PyCFunction_Call + 0x52 (0x4f5412 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #21: _PyObject_MakeTpCall + 0x3bb (0x4e0cab in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #22: /home/ev4939/.conda/envs/cutqc/bin/python() [0x4f51bd]
+[rank1]: frame #23: _PyEval_EvalFrameDefault + 0x49b9 (0x4dc939 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #24: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #25: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #26: PyObject_Call + 0x34e (0x4f756e in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #27: _PyEval_EvalFrameDefault + 0x207d (0x4d9ffd in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #28: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #29: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #30: _PyEval_EvalFrameDefault + 0x115a (0x4d90da in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #31: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #32: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #33: _PyEval_EvalFrameDefault + 0x6b2 (0x4d8632 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #34: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #35: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #36: _PyObject_FastCallDict + 0x282 (0x4e0462 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #37: /home/ev4939/.conda/envs/cutqc/bin/python() [0x4f1a73]
+[rank1]: frame #38: _PyObject_MakeTpCall + 0x3d3 (0x4e0cc3 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #39: _PyEval_EvalFrameDefault + 0x4fb6 (0x4dcf36 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #40: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #41: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #42: _PyObject_FastCallDict + 0x282 (0x4e0462 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #43: /home/ev4939/.conda/envs/cutqc/bin/python() [0x4f1a73]
+[rank1]: frame #44: _PyObject_MakeTpCall + 0x3d3 (0x4e0cc3 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #45: _PyEval_EvalFrameDefault + 0x4fb6 (0x4dcf36 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #46: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #47: /home/ev4939/.conda/envs/cutqc/bin/python() [0x4f4f7b]
+[rank1]: frame #48: _PyEval_EvalFrameDefault + 0x115a (0x4d90da in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #49: _PyFunction_Vectorcall + 0x106 (0x4e8036 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #50: _PyEval_EvalFrameDefault + 0x39b (0x4d831b in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #51: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #52: _PyFunction_Vectorcall + 0x19c (0x4e80cc in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #53: _PyEval_EvalFrameDefault + 0x115a (0x4d90da in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #54: _PyEval_EvalCodeWithName + 0x2f1 (0x4d6f41 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #55: PyEval_EvalCodeEx + 0x39 (0x586749 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #56: PyEval_EvalCode + 0x1b (0x58670b in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #57: /home/ev4939/.conda/envs/cutqc/bin/python() [0x5a6541]
+[rank1]: frame #58: /home/ev4939/.conda/envs/cutqc/bin/python() [0x5a554f]
+[rank1]: frame #59: /home/ev4939/.conda/envs/cutqc/bin/python() [0x45c485]
+[rank1]: frame #60: PyRun_SimpleFileExFlags + 0x340 (0x45bfe7 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #61: /home/ev4939/.conda/envs/cutqc/bin/python() [0x44fb81]
+[rank1]: frame #62: Py_BytesMain + 0x39 (0x57a799 in /home/ev4939/.conda/envs/cutqc/bin/python)
+[rank1]: frame #63: __libc_start_main + 0xe5 (0x15547bcef7e5 in /lib64/libc.so.6)
+[rank1]: . This may indicate a possible application crash on rank 0 or a network set up issue.
+srun: error: adroit-h11g3: task 0: Exited with exit code 1
+srun: Terminating StepId=2203962.0
+slurmstepd: error: *** STEP 2203962.0 ON adroit-h11g3 CANCELLED AT 2024-07-24T12:23:28 ***
+srun: error: adroit-h11g3: task 1: Terminated
+srun: Force Terminated StepId=2203962.0

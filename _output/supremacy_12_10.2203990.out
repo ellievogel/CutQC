@@ -1,0 +1,42 @@
+MASTER_ADDR=adroit-h11g3
+MASTER_PORT=21350
+WORLD_SIZE=2
+2024-07-24 13:38:10.618290: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File "cut_and_eval.py", line 11, in <module>
+    from cutqc.main import CutQC 
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 7, in <module>
+    logging.disable(logging.WARNING)
+NameError: name 'logging' is not defined
+2024-07-24 13:38:14.851607: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:38:14.852001: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:38:15.711862: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-07-24 13:38:15.711772: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File "dist_run.py", line 5, in <module>
+    from cutqc.main import CutQC
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 7, in <module>
+    logging.disable(logging.WARNING)
+NameError: name 'logging' is not defined
+Traceback (most recent call last):
+  File "dist_run.py", line 5, in <module>
+    from cutqc.main import CutQC
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/main.py", line 12, in <module>
+    from cutqc.dynamic_definition import DynamicDefinition, full_verify
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/dynamic_definition.py", line 11, in <module>
+    from cutqc.graph_contraction import GraphContractor
+  File "/scratch/network/ev4939/projects/CutQC/cutqc/graph_contraction.py", line 7, in <module>
+    logging.disable(logging.WARNING)
+NameError: name 'logging' is not defined
+srun: error: adroit-h11g3: tasks 0-1: Exited with exit code 1
+srun: Terminating StepId=2203990.0

@@ -1,0 +1,75 @@
+MASTER_ADDR=adroit-h11g3
+MASTER_PORT=50140
+WORLD_SIZE=2
+2024-07-24 13:35:14.355371: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Cutting and Evalualting supremacy_12_10.pkl --- 
+-- Cut -- 
+Set parameter GURO_PAR_SPECIAL
+Set parameter TokenServer to value "license.rc.princeton.edu"
+-- Done Cutting -- 
+
+-- Evaluate --
+-- Done Evaluating -- 
+
+-- Dumping CutQC Object into supremacy_12_10.pkl --
+2024-07-24 13:36:17.894994: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:36:17.896025: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-07-24 13:36:18.839074: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-07-24 13:36:18.839146: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 0
+World Rank: 0
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 0. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+subcircuit_entry_lengh: [32, 128]
+batches Host: (tensor([[[ 1.3404e-03,  6.1160e-02,  1.3404e-03,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [ 3.7444e-02,  6.7354e-02,  7.6507e-02,  ...,  3.4208e-02,
+           8.7556e-02,  7.9743e-02]],
+
+        [[-7.3184e-19,  8.6736e-19, -3.7947e-19,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [ 7.1423e-03,  3.9062e-03,  3.9062e-03,  ...,  3.9062e-03,
+           3.9062e-03,  7.1423e-03]],
+
+        [[ 4.6079e-19,  1.7347e-18, -1.1045e-18,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [ 2.3715e-02,  5.8201e-02,  4.9048e-02,  ..., -1.9139e-02,
+          -7.2486e-02, -5.3625e-02]],
+
+        ...,
+
+        [[ 2.9816e-19,  7.8125e-03,  5.9631e-19,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [ 0.0000e+00, -1.5613e-17,  1.5625e-02,  ..., -7.8125e-03,
+           7.8125e-03, -7.8125e-03]],
+
+        [[ 1.9630e-04,  4.3802e-03,  1.1441e-03,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [ 2.2097e-02, -2.2097e-02,  2.2097e-02,  ..., -1.1049e-02,
+          -1.1049e-02,  1.1049e-02]],
+
+        [[-5.4210e-20,  1.0408e-17, -1.3553e-19,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [-1.5625e-02, -1.5625e-02,  1.5625e-02,  ...,  1.5625e-02,
+          -1.5625e-02, -1.5625e-02]]]),)
+--- Beginning dist_run.py ---
+args.backend: nccl
+Local Rank: 1
+World Rank: 1
+World Size: 2
+GPUS-Avail: 2
+Hello world! This is worker: 1. I have 2 siblings!
+-- Running pickle_files/supremacy_12_10.pkl --
+self.parallel_reconstruction: True
+TENSORSIZES SHAPE 2
+reconstruct works
+Compute Time: 0.6630167029798031
+DESTROYING NOW ! 0.6630167029798031
+TENSORSIZES SHAPE -1
