@@ -77,6 +77,9 @@ class DynamicDefinition(object):
                 subcircuit_entry_probs=merged_subcircuit_entry_probs,
                 num_cuts=self.num_cuts,
                 )
+
+            print('reconstruct works')
+        
             
             smart_order = self.graph_contractor.smart_order
             recursion_overhead = self.graph_contractor.overhead
